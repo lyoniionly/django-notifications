@@ -190,6 +190,7 @@ class Notification(models.Model):
     emailed = models.BooleanField(default=False)
 
     data = JSONField(blank=True, null=True)
+	notify_type = models.CharField(max_length=50, blank=True, null=True)
     objects = managers.PassThroughManager.for_queryset_class(NotificationQuerySet)()
 
     class Meta:
@@ -258,6 +259,7 @@ def notify_handler(verb, **kwargs):
         verb=text_type(verb),
         public=bool(kwargs.pop('public', True)),
         description=kwargs.pop('description', None),
+		notify_type=kwargs.pop('notify_type', None),
         timestamp=kwargs.pop('timestamp', now()),
         level=kwargs.pop('level', Notification.LEVELS.info),
     )

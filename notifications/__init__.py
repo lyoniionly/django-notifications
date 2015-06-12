@@ -1,10 +1,12 @@
+from __future__ import absolute_import
+
 try:
-    from notifications.signals import notify
+    from .signals import notify
 except ImportError:
     pass
 
 try:
-    from notifications.urls import urlpatterns
+    from .urls import urlpatterns
     urls = (urlpatterns, 'notifications', 'notifications')
 except ImportError:
     pass
